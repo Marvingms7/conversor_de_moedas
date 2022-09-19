@@ -5,7 +5,7 @@ import 'dart:convert';
 
 void main() async {
   runApp(MaterialApp(
-    home: const Home(),
+    home: Home(),
     theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.white),
   ));
 }
@@ -63,23 +63,49 @@ class _HomeState extends State<Home> {
                   var euro =
                       snapshot.data!['results']['currencies']['EUR']['buy'];
                   return SingleChildScrollView(
+                    padding: const EdgeInsets.all(10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         const Icon(
                           Icons.monetization_on,
-                          size: 150.0,
+                          size: 190.0,
                           color: Colors.amber,
                         ),
+                        const Divider(),
                         const TextField(
                           decoration: InputDecoration(
                               labelText: 'Reais',
                               labelStyle: TextStyle(color: Colors.amber),
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
                               prefixText: 'R\$'),
                           style: TextStyle(color: Colors.amber, fontSize: 25.0),
-                        )
+                        ),
+                        const Divider(),
+                        const TextField(
+                          decoration: InputDecoration(
+                              labelText: 'Dólares',
+                              labelStyle: TextStyle(color: Colors.amber),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              prefixText: '\$'),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
+                        const Divider(),
+                        const TextField(
+                          decoration: InputDecoration(
+                              labelText: 'Euros',
+                              labelStyle: TextStyle(color: Colors.amber),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              prefixText: '€'),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
                       ],
                     ),
                   );
