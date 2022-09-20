@@ -5,7 +5,7 @@ import 'dart:convert';
 
 void main() async {
   runApp(MaterialApp(
-    home: Home(),
+    home: const Home(),
     theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.white),
   ));
 }
@@ -31,16 +31,16 @@ class _HomeState extends State<Home> {
   late double dolar;
   late double euro;
 
-  void realMudanca(String text) {
-    print(text);
+  void _realMudanca(String text) {
+    double real = double.parse(text);
   }
 
-  void dolarMudanca(String text) {
-    print(text);
+  void _dolarMudanca(String text) {
+    double dolar = double.parse(text);
   }
 
-  void euroMudanca(String text) {
-    print(text);
+  void _euroMudanca(String text) {
+    double euro = double.parse(text);
   }
 
   @override
@@ -92,13 +92,13 @@ class _HomeState extends State<Home> {
                         ),
                         const Divider(),
                         buildTextField(
-                            'Reais', 'R\$', realControlador, realMudanca),
+                            'Reais', 'R\$', realControlador, _realMudanca),
                         const Divider(),
                         buildTextField(
-                            'Dólares', 'US\$', dolarControlador, dolarMudanca),
+                            'Dólares', 'US\$', dolarControlador, _dolarMudanca),
                         const Divider(),
                         buildTextField(
-                            'Euros', '€', euroControlador, euroMudanca),
+                            'Euros', '€', euroControlador, _euroMudanca),
                       ],
                     ),
                   );
@@ -122,5 +122,6 @@ Widget buildTextField(
         prefixText: prefix),
     style: const TextStyle(color: Colors.amber, fontSize: 25.0),
     onChanged: m(),
+    keyboardType: TextInputType.number,
   );
 }
