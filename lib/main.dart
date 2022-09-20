@@ -24,6 +24,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final realControlador = TextEditingController();
+  final dolarControlador = TextEditingController();
+  final euroControlador = TextEditingController();
+
+  late double dolar;
+  late double euro;
+
+  void realMudanca(String text) {
+    print(text);
+  }
+
+  void dolarMudanca(String text) {
+    print(text);
+  }
+
+  void euroMudanca(String text) {
+    print(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +77,8 @@ class _HomeState extends State<Home> {
                         textAlign: TextAlign.center),
                   );
                 } else {
-                  var dolar =
-                      snapshot.data!['results']['currencies']['USD']['buy'];
-                  var euro =
-                      snapshot.data!['results']['currencies']['EUR']['buy'];
+                  dolar = snapshot.data!['results']['currencies']['USD']['buy'];
+                  euro = snapshot.data!['results']['currencies']['EUR']['buy'];
                   return SingleChildScrollView(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
@@ -74,38 +91,14 @@ class _HomeState extends State<Home> {
                           color: Colors.amber,
                         ),
                         const Divider(),
-                        const TextField(
-                          decoration: InputDecoration(
-                              labelText: 'Reais',
-                              labelStyle: TextStyle(color: Colors.amber),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              prefixText: 'R\$'),
-                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
-                        ),
+                        buildTextField(
+                            'Reais', 'R\$', realControlador, realMudanca),
                         const Divider(),
-                        const TextField(
-                          decoration: InputDecoration(
-                              labelText: 'Dólares',
-                              labelStyle: TextStyle(color: Colors.amber),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              prefixText: '\$'),
-                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
-                        ),
+                        buildTextField(
+                            'Dólares', 'US\$', dolarControlador, dolarMudanca),
                         const Divider(),
-                        const TextField(
-                          decoration: InputDecoration(
-                              labelText: 'Euros',
-                              labelStyle: TextStyle(color: Colors.amber),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              prefixText: '€'),
-                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
-                        ),
+                        buildTextField(
+                            'Euros', '€', euroControlador, euroMudanca),
                       ],
                     ),
                   );
@@ -114,4 +107,20 @@ class _HomeState extends State<Home> {
           }),
     );
   }
+}
+
+Widget buildTextField(
+    String label, String prefix, TextEditingController c, Function m) {
+  return TextField(
+    controller: c,
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.amber),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        prefixText: prefix),
+    style: const TextStyle(color: Colors.amber, fontSize: 25.0),
+    onChanged: m(),
+  );
 }
