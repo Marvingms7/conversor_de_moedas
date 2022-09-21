@@ -33,14 +33,20 @@ class _HomeState extends State<Home> {
 
   void _realMudanca(String text) {
     double real = double.parse(text);
+    dolarControlador.text = (real / dolar).toStringAsFixed(2);
+    euroControlador.text = (real / euro).toStringAsFixed(2);
   }
 
   void _dolarMudanca(String text) {
     double dolar = double.parse(text);
+    realControlador.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroControlador.text = (dolar * this.dolar / euro).toStringAsFixed(2);
   }
 
   void _euroMudanca(String text) {
     double euro = double.parse(text);
+    realControlador.text = (euro * this.euro).toStringAsFixed(2);
+    dolarControlador.text = (euro * this.euro / dolar).toStringAsFixed(2);
   }
 
   @override
@@ -109,8 +115,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget buildTextField(
-    String label, String prefix, TextEditingController c, Function m) {
+Widget buildTextField(String label, String prefix, TextEditingController c, m) {
   return TextField(
     controller: c,
     decoration: InputDecoration(
@@ -121,7 +126,7 @@ Widget buildTextField(
         ),
         prefixText: prefix),
     style: const TextStyle(color: Colors.amber, fontSize: 25.0),
-    onChanged: m(),
+    onChanged: m,
     keyboardType: TextInputType.number,
   );
 }
